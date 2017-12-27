@@ -1,8 +1,10 @@
 <?php
 
 /**
- * @author      ZEUS Design - http://www.zeusdesign.com.tw
- * @copyright   Copyright (c) 2016 ZEUS Design
+ * @author      OA Wu <comdan66@gmail.com>
+ * @copyright   Copyright (c) 2017 OA Wu Design
+ * @license     http://creativecommons.org/licenses/by-nc/2.0/tw/
+ * @link        https://www.ioa.tw/
  */
 
 class S3 {
@@ -22,6 +24,11 @@ class S3 {
     self::$__access_key = $access_key;
     self::$__secret_key = $secret_key;
     return true;
+  }
+  public static function test () {
+    $rest = new S3Request ('GET', '', '');
+    $rest = $rest->getResponse ();
+    return !(($rest->error !== false) || ($rest->code !== 200));
   }
 
   public static function listBuckets ($detailed = false) {
@@ -51,7 +58,7 @@ class S3 {
       $results = array ();
       foreach ($rest->body->Buckets->Bucket as $bucket) array_push ($results, $bucket);
     }
-
+      
     return $results;
   }
 
@@ -85,7 +92,7 @@ class S3 {
     if (($maxKeys == null) && ($nextMarker !== null) && (((String)$response->body->IsTruncated) == 'true'))
       do {
         $rest = new S3Request ('GET', $bucket, '');
-
+        
         if (($prefix !== null) && ($prefix !== '')) $rest->setParameter ('prefix', $prefix);
         $rest->setParameter ('marker', $nextMarker);
 
@@ -152,10 +159,10 @@ class S3 {
     $rest->setHeader ('Content-Type', self::__getMimeType ($filePath))
          ->setHeader ('Content-MD5', self::fileMD5 ($filePath));
     foreach ($requestHeaders as $h => $v) $rest->setHeader ($h, $v);
-
+    
     $rest->setAmzHeader ('x-amz-acl', $acl);
     foreach ($metaHeaders as $h => $v) $rest->setAmzHeader ('x-amz-meta-' . $h, $v);
-
+    
     if (!(($rest->size >= 0) && (($rest->fp !== false) || ($rest->data !== false))))
       throw new Exception (sprintf ("S3::putObject(): [%s] %s", 0, 'Missing input parameters'));
 
@@ -178,13 +185,13 @@ class S3 {
 
   public static function getObject($bucket, $uri, $saveTo = false) {
     $rest = new S3Request ('GET', $bucket, $uri);
-
+    
     if ($saveTo !== false)
       if (($rest->fp = @fopen ($saveTo, 'wb')) !== false) $rest->file = realpath ($saveTo);
       throw new Exception (sprintf ("S3::getObject(%s, %s): [%s] %s",$bucket, $uri, 0, 'Unable to open save file for writing: ' . $saveTo));
 
     $rest->getResponse();
-
+    
     if (($rest->response->error !== false) || ($rest->response->code !== 200))
       throw new Exception (sprintf ("S3::getObject(%s, %s): [%s] %s",$bucket, $uri, $rest->response->code, 'Unexpected HTTP status'));
 
@@ -224,7 +231,7 @@ class S3 {
 
     return isset ($rest->body->LastModified, $rest->body->ETag) ? array ('time' => date ('Y-m-d H:i:s', strtotime ((String) $rest->body->LastModified)), 'hash' => substr ((String) $rest->body->ETag, 1, -1)) : false;
   }
-
+  
   public static function getBucketLocation ($bucket) {
     $rest = new S3Request ('GET', $bucket, '');
     $rest->setParameter ('location', null);
@@ -323,7 +330,7 @@ final class S3Request {
 
     foreach ($this->amzHeaders as $header => $value)
       if (strlen ($value) > 0) $headers[] = $header . ': ' . $value;
-
+    
     foreach ($this->headers as $header => $value)
       if (strlen ($value) > 0) $headers[] = $header . ': ' . $value;
 
@@ -374,7 +381,7 @@ final class S3Request {
 
     if (curl_exec ($curl)) $this->response->code = curl_getinfo ($curl, CURLINFO_HTTP_CODE);
     else $this->response->error = array ('code' => curl_errno ($curl), 'message' => curl_error ($curl), 'resource' => $this->resource);
-
+    
     @curl_close ($curl);
 
     if ($this->response->error === false && isset ($this->response->headers['type']) && $this->response->headers['type'] == 'application/xml' && isset ($this->response->body)) {
@@ -402,7 +409,7 @@ final class S3Request {
 
   private function __responseHeaderCallback (&$curl, &$data) {
     if (($strlen = strlen ($data)) <= 2) return $strlen;
-
+    
     if (substr ($data, 0, 4) == 'HTTP') { $this->response->code = (int)substr ($data, 9, 3); }
     else {
       list ($header, $value) = explode (': ', trim ($data), 2);

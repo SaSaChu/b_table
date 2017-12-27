@@ -1,11 +1,17 @@
 <?php
 
 /**
- * @author      ZEUS Design - http://www.zeusdesign.com.tw
- * @copyright   Copyright (c) 2016 ZEUS Design
+ * @author      OA Wu <comdan66@gmail.com>
+ * @copyright   Copyright (c) 2017 OA Wu Design
+ * @license     http://creativecommons.org/licenses/by-nc/2.0/tw/
+ * @link        https://www.ioa.tw/
  */
 
-class Min {
+include_once PATH_CMD_LIBS . 'Minify' . DIRECTORY_SEPARATOR . 'CSSMin.php';
+include_once PATH_CMD_LIBS . 'Minify' . DIRECTORY_SEPARATOR . 'JSMin.php';
+include_once PATH_CMD_LIBS . 'Minify' . DIRECTORY_SEPARATOR . 'HTMLMin.php';
+
+class Minify {
   private static $list = array ();
 
   private static function asset () {
@@ -56,7 +62,3 @@ class Min {
     return $data;
   }
 }
-
-include_once 'CSSMin.php';
-include_once 'JSMin.php';
-include_once 'HTMLMin.php';
