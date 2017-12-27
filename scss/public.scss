@@ -26,16 +26,326 @@ html {
     width: 100%;
     min-height: 100%;
     margin: 0;
-    padding: 0;
+    padding: 10px;
 
     color: rgba(90, 90, 90, 1.00);
     text-align: center;
-    font-size: medium;
+    font-size: 12px;
     font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "微軟正黑體", "Microsoft JhengHei";
 
-    background: $mainBackgroundColor;
-    background-image: $mainBackgroundImage;
+    background: rgba(243, 169, 205, 1.00);
 
     @include font-smoothing(antialiased);
+
   }
 }
+
+
+.out_boxs {
+  display: inline-block;
+  width: 100%;
+  height: calc(100vh - 20px);
+  @include border-radius(5px);
+  background-color: white;
+  border: 2px solid rgba(231, 112, 165, 1.00);
+
+  .out_box {
+    display: inline-block;
+    width: 100%; 
+    height: 100%;
+    padding: 15px;
+    overflow-y: scroll;
+
+    p {
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+      color: rgba(60, 60, 60, 1.00);
+      font-size: 1.3rem;
+      text-align: justify;
+      line-height: 30px;
+    }
+
+    button {
+      display: inline-block;
+      @include border-radius(3px);
+      border: 1px solid rgba(39, 182, 20, 1.00);
+      padding: 10px 40px;
+      background: #91f181; /* Old browsers */
+      background: -moz-linear-gradient(top, #91f181 0%, #2cbf13 50%, #91f181 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(top, #91f181 0%,#2cbf13 50%,#91f181 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to bottom, #91f181 0%,#2cbf13 50%,#91f181 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91f181', endColorstr='#91f181',GradientType=0 ); /* IE6-9 */
+    
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 600;
+      outline: 0;
+
+      margin: 15px 0;
+
+      &.btn_ok {
+        border: 1px solid rgba(0, 135, 163, 1.00);
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2bb8d4+0,00add0+100 */
+        background: #2bb8d4; /* Old browsers */
+        background: -moz-linear-gradient(top, #2bb8d4 0%, #00add0 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, #2bb8d4 0%,#00add0 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, #2bb8d4 0%,#00add0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2bb8d4', endColorstr='#00add0',GradientType=0 ); /* IE6-9 */
+        color: white;
+        padding: 10px 80px;
+      }
+    }
+
+    .r_boxs {
+      display: inline-block;
+      width: 100%;
+      @include border-radius(3px);
+      background-color: red;
+
+      font-size: 1.1rem;
+      color: white;
+      text-align: left;
+      padding: 10px;
+      font-weight: 600;
+    }
+
+    .date_boxs {
+      display: inline-block;
+      width: 100%;
+      margin: 15px 0;
+      text-align: left;
+
+      p {
+        display: inline-block;
+        width: 100%;
+        font-size: 1.3rem;
+        padding: 0;
+        margin: 0;
+        font-weight: 600;
+        color: rgba(255, 63, 126, 1.00);
+        padding-top: 15px;
+
+        &:before {
+          display: inline-block;
+          content: '\e901';
+          font-size: 1.6rem;
+          font-family: icomoon;
+          margin-right: 10px;
+        }
+      }
+
+      .date_box {
+        display: inline-block;
+        width: 100%;
+
+        p {
+          display: inline-block;
+          width: 100%;
+          font-size: 1.3rem;
+          padding: 0;
+          margin: 0;
+          font-weight: 600;
+          color: black;
+          padding: 10px 0;
+
+          &:before {
+            display: inline-block;
+            content: '\e900';
+            font-size: 2rem;
+            color: rgba(255, 62, 125, 1.00);
+            font-family: icomoon;
+            margin-right: 5px;
+            margin-left: -3px;
+          }
+        }
+
+        .boxs {
+          display: inline-block;
+          width: 100%;
+          padding-left: 30px;
+          padding-bottom: 15px;
+
+          .years {
+            display: inline-block;
+            width: calc(100% - 24px);
+            border: 1px solid rgba(181, 179, 181, 1.00);
+            font-size: 1rem;
+            padding: 5px;
+            outline: 0;
+          }
+
+          i {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+            color: black;
+            font-size: 1.2rem;
+            font-style: normal;
+          }
+
+          input {
+            display: inline-block;
+            width: calc(50% - 36px);
+            border: 1px solid rgba(181, 179, 181, 1.00);
+            font-size: 1rem;
+            color: black;
+            padding: 5px;
+            outline: 0;
+
+            &:nth-child(3) {
+              margin-left: 23px;
+            }
+          }
+        }
+      }
+    }
+
+    .info_boxs {
+      display: inline-block;
+      width: 100%;
+      padding: 5px;
+      @include border-radius(3px);
+
+      -webkit-box-shadow: 0 0 10px rgba(179, 177, 178, .8);
+      -moz-box-shadow: 0 0 10px rgba(179, 177, 178, .8);
+      box-shadow: 0 0 10px rgba(179, 177, 178, .8);
+
+      .info_box {
+        display: inline-block;
+        width: 100%;
+        padding: 10px;
+        @include border-radius(3px);
+        border: 1px dotted rgba(203, 203, 203, 1.00);
+
+        h4 {
+          display: inline-block;
+          font-size: 1.2rem;
+          line-height: 50px;
+          color: rgba(39, 182, 19, 1.00);
+          font-weight: 600;
+          margin: 0;
+
+          &:before {
+            display: inline-block;
+            content: 'LINE@';
+            font-size: .3rem;
+            color: white;
+            font-weight: 600;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            margin-right: 5px;
+            background-color: rgba(39, 182, 19, 1.00);
+            @include border-radius(5px);
+          }
+        }
+
+        h5 {
+          display: inline-block;
+          width: 100%;
+          font-size: 1rem;
+          font-weight: 600;
+          margin: 0;
+          padding: 15px 0;
+        }
+
+        .check_boxs {
+          display: inline-block;
+          width: 100%;
+          @include border-radius(3px);
+          margin-bottom: 15px;
+          padding: 10px;
+          text-align: left;
+          background-color: rgba(207, 240, 202, 1.00);
+          // d
+
+          &.pink {
+            background-color: rgba(255, 224, 238, 1.00);
+          }
+
+          .c_title {
+            display: inline-block;
+            width: 100%;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-bottom: 1px dotted rgba(39, 182, 20, 1.00);
+            color: rgba(39, 182, 20, 1.00);
+            padding-bottom: 10px;
+
+            &.p_title {
+              color: rgba(255, 54, 114, 1.00);
+              border-bottom: 1px dotted rgba(255, 54, 114, 1.00);
+
+              &:before {
+                content: '\e903';
+              }
+            }
+
+            b {
+              font-size: 1.6rem;
+            }
+
+            &:before {
+              display: inline-block;
+              content: '\e902';
+              font-family: icomoon;
+              font-size: 1rem;
+              padding-right: 5px;
+              line-height: 30px;
+            }
+          }
+
+          .g_cboxs {
+            display: inline-block;
+            width: 100%;
+            font-size: 1.2rem;
+            color: black;
+            font-weight: 600;
+            padding-top: 10px;
+
+            .check {
+              margin-top: 4px;
+              @include checkbox(rgba(40, 183, 20, 1.00));
+
+              &.check_p {
+                @include checkbox(rgba(255, 54, 114, 1.00));
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .note {
+      display: inline-block;
+      width: 100%;
+      font-size: 1rem;
+      color: red;
+      text-align: left;
+      margin: 0;
+      padding: 10px 0;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
