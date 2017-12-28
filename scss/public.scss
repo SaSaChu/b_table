@@ -138,7 +138,8 @@ html {
       .date_box {
         display: inline-block;
         width: 100%;
-
+        @include clearfix();
+        
         p {
           display: inline-block;
           width: 100%;
@@ -162,13 +163,25 @@ html {
 
         .boxs {
           display: inline-block;
-          width: 100%;
+          width: calc(100% / 3);
           padding-left: 30px;
-          padding-bottom: 15px;
+          float: left;
+          text-align: left;
+          margin-bottom: 15px;
+
+          @include range-width(0, 450px) {
+            width: 100%;
+
+            + * {
+              width: 50%;
+            }
+          }
 
           .years {
             display: inline-block;
-            width: calc(100% - 24px);
+            height: 30px;
+            line-height: 30px;
+            width: calc(100% - 24px - 5px);
             border: 1px solid rgba(181, 179, 181, 1.00);
             font-size: 1rem;
             padding: 5px;
@@ -182,21 +195,22 @@ html {
             color: black;
             font-size: 1.2rem;
             font-style: normal;
+            padding-left: 5px;
           }
 
-          input {
-            display: inline-block;
-            width: calc(50% - 36px);
-            border: 1px solid rgba(181, 179, 181, 1.00);
-            font-size: 1rem;
-            color: black;
-            padding: 5px;
-            outline: 0;
+          // input {
+          //   display: inline-block;
+          //   width: calc(50% - 36px);
+          //   border: 1px solid rgba(181, 179, 181, 1.00);
+          //   font-size: 1rem;
+          //   color: black;
+          //   padding: 5px;
+          //   outline: 0;
 
-            &:nth-child(3) {
-              margin-left: 23px;
-            }
-          }
+          //   &:nth-child(3) {
+          //     margin-left: 23px;
+          //   }
+          // }
         }
       }
     }
@@ -217,7 +231,8 @@ html {
         padding: 10px;
         @include border-radius(3px);
         border: 1px dotted rgba(203, 203, 203, 1.00);
-
+        @include clearfix();
+    
         h4 {
           display: inline-block;
           font-size: 1.2rem;
@@ -258,7 +273,16 @@ html {
           padding: 10px;
           text-align: left;
           background-color: rgba(207, 240, 202, 1.00);
-          // d
+
+          @include range-width(450px, 1980px) {
+            width: calc(50% - 5px * 2);
+            float: left;
+
+            &:last-child {
+              float: right;
+            }
+          }
+
 
           &.pink {
             background-color: rgba(255, 224, 238, 1.00);
